@@ -1,17 +1,8 @@
-name: Build, Lint and Test
+name: Build
 
 on: [push, pull_request]
 
 jobs:
-
-  lint:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-      - uses: wagoid/commitlint-github-action@v1
-
   build:
 
     strategy:
@@ -21,13 +12,10 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     steps:
-      - uses:
-        - actions/checkout@v2
-      - name: Setup .NET Core
-        uses: actions/setup-dotnet@v1
-        with:
-          dotnet-version: ${{ matrix.dotnet }}
-      - name: Restore tools
-        run: dotnet tool restore
-      - name: Run Test
-        run: dotnet test
+    - uses: actions/checkout@v1
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: ${{ matrix.dotnet }}
+    - name: Restore tools
+      run: dotnet tool restore
