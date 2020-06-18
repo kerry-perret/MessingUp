@@ -6,6 +6,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 ProjectSection(SolutionItems) = preProject
 	README.md = README.md
 	.gitignore = .gitignore
+	.commitlintrc.yml = .commitlintrc.yml
 EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{6A262A2E-0314-4BF2-B3A2-DC222A231B1D}"
@@ -13,7 +14,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{17A2C405-A316-4679-B3E4-77704558F90D}"
 ProjectSection(SolutionItems) = preProject
 	.github\workflows\build.yml = .github\workflows\build.yml
-	.github\workflows\commitlint.yml = .github\workflows\commitlint.yml
 EndProjectSection
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "MessingUp.Tests", "MessingUp.Tests\MessingUp.Tests.fsproj", "{09DFE9CF-B3F7-4277-9DE5-D950997CFBFD}"

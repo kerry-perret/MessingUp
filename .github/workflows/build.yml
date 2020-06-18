@@ -1,4 +1,4 @@
-name: Build, Lint and Test
+name: Lint Commit, Build Binaries and Run Unit Test
 
 on: [push, pull_request]
 
@@ -7,11 +7,14 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-      with:
-        fetch-depth: 0
-    - uses: wagoid/commitlint-github-action@v1
-
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - run: sed -i -E "s/([']docker:.+)/Dockerfile/" ./action.yml
+      - run: echo -n '' > .dockerignore
+      - uses: ./
+        with:
+          configFile: './.commitlintrc.yml'
   build:
 
     strategy:
