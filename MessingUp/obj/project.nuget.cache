@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "Sp4+iw7b+18+ED2CVJVGyfzFmq5QLuEOTxYk7ZHVaMDgKcVqHdHMI0xfgVIZYuqnj0ExYPk3dXvoM105maZo/g==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Michelle\\Desktop\\Work\\MessingUp\\MessingUp\\MessingUp.fsproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Michelle\\.nuget\\packages\\fsharp.core\\4.7.1\\fsharp.core.4.7.1.nupkg.sha512"
+  ],
+  "logs": []
+}
