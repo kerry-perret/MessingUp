@@ -18,6 +18,7 @@ jobs:
     needs: [lint-commit]
     strategy:
       matrix:
+        fail-fast: false
         os: [windows-latest, macos-latest, ubuntu-latest]
         dotnet: [3.1.201]
     runs-on: ${{ matrix.os }}
