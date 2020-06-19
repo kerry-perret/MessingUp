@@ -14,6 +14,7 @@ jobs:
         with:
           configFile: './.commitlintrc.yml'
           firstParent: false
+          failOnWarnings: true
 
   build:
     needs: [lint-commit]
