@@ -1,4 +1,4 @@
-name: On PR
+name: On Pull Request
 
 on: [pull_request]
 
@@ -15,24 +15,3 @@ jobs:
           configFile: './.commitlintrc.yml'
           firstParent: false
           failOnWarnings: true
-
-  build:
-    needs: [lint-commit]
-    strategy:
-      matrix:
-        os: [windows-latest, macos-latest, ubuntu-latest]
-        dotnet: [3.1.201]
-    runs-on: ${{ matrix.os }}
-
-    steps:
-    - uses: actions/checkout@v2
-    - name: Setup .NET Core
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: ${{ matrix.dotnet }}
-    - name: Restore tools
-      run: dotnet tool restore
-    - name: Lint Code
-      run: dotnet fsharplint lint --lint-config fsharplint.json
-    - name: Run Test
-      run: dotnet test
