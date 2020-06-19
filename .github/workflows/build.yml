@@ -13,8 +13,9 @@ jobs:
       - uses: wagoid/commitlint-github-action@v1
         with:
           configFile: './.commitlintrc.yml'
-  build:
 
+  build:
+    needs: [lint]
     strategy:
       matrix:
         os: [windows-latest, macos-latest, ubuntu-latest]
