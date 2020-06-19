@@ -7,6 +7,7 @@ ProjectSection(SolutionItems) = preProject
 	README.md = README.md
 	.gitignore = .gitignore
 	.commitlintrc.yml = .commitlintrc.yml
+	fsharplint.json = fsharplint.json
 EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{6A262A2E-0314-4BF2-B3A2-DC222A231B1D}"
