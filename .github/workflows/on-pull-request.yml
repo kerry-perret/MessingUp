@@ -18,22 +18,14 @@ jobs:
           firstParent: false
           failOnWarnings: true
 
-  build:
-
+  lint-code:
     strategy:
       matrix:
         os: [windows-latest, macos-latest, ubuntu-latest]
-        dotnet: [3.1.200]
+        dotnet: [2.1.0]
+      fail-fast: true
     runs-on: ${{ matrix.os }}
-
     steps:
-      - uses: actions/checkout@v2
-      - name: Setup .NET Core
-        uses: actions/setup-dotnet@v1
-        with:
-          dotnet-version: ${{ matrix.dotnet }}
-      - name: Build binaries
-        run: dotnet build
       - name: Restore tools
         run: dotnet tool restore
       - name: Run F# Linter
