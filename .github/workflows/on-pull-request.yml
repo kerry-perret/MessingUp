@@ -1,0 +1,40 @@
+name: On Pull Request
+
+on: [pull_request]
+
+jobs:
+
+  lint-commit:
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: wagoid/commitlint-github-action@v1
+        with:
+          configFile: './.commitlintrc.yml'
+          firstParent: false
+          failOnWarnings: true
+
+  build:
+
+    strategy:
+      matrix:
+        os: [windows-latest, macos-latest, ubuntu-latest]
+        dotnet: [3.1.200]
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: ${{ matrix.dotnet }}
+      - name: Build binaries
+        run: dotnet build
+      - name: Restore tools
+        run: dotnet tool restore
+      - name: Run F# Linter
+        run: dotnet fsharplint lint --lint-config fsharplint.json MessingUp.sln
