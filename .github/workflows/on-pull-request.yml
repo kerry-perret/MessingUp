@@ -19,8 +19,6 @@ jobs:
           dotnet-version: ${{ matrix.dotnet }}
       - name: Restore tools
         uses: actions/setup-dotnet@v1
-        with:
-          dotnet-version: 2.1
         run: |
           export PATH="$PATH:/root/.dotnet/tools"
           dotnet tool install -g dotnet-fsharplint --version 0.13.3
