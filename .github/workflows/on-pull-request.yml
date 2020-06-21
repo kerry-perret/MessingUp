@@ -4,7 +4,22 @@ on: [pull_request]
 
 jobs:
 
+  lint-commit:
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: wagoid/commitlint-github-action@v1
+        with:
+          configFile: './.commitlintrc.yml'
+          firstParent: false
+          failOnWarnings: true
+
   lint-code:
+    needs: lint-commit
     # So that we don't juggle with different OS for accessing the right path...
     runs-on: ubuntu-latest
     steps:
@@ -13,6 +28,8 @@ jobs:
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: 2.1
+      # For some reasons the path is kinda messed up...
+      # Doesn't consider the .config folder =|
       - name: Restore tools
         run: |
           export PATH="$PATH:/root/.dotnet/tools"
@@ -20,8 +37,8 @@ jobs:
       - name: Run F# Linter
         run: dotnet fsharplint lint --lint-config fsharplint.json MessingUp.sln
 
-  build-test-binaries:
-    needs: lint-code
+  run-test:
+    needs: [lint-commit, lint-code]
     strategy:
       matrix:
         os: [windows-latest, macos-latest, ubuntu-latest]
@@ -34,7 +51,5 @@ jobs:
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: ${{ matrix.dotnet }}
-      - name: Build binaries
-        run: dotnet build
       - name: Run Tests
         run: dotnet test

@@ -10,6 +10,8 @@ ProjectSection(SolutionItems) = preProject
 	fsharplint.json = fsharplint.json
 	CHANGELOG.md = CHANGELOG.md
 	CONTRIBUTING.md = CONTRIBUTING.md
+	package.json = package.json
+	package-lock.json = package-lock.json
 EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{6A262A2E-0314-4BF2-B3A2-DC222A231B1D}"

@@ -19,6 +19,7 @@ build/
 [Bb]in/
 [Oo]bj/
 
+
 # MSTest test Results
 [Tt]est[Rr]esult*/
 [Bb]uild[Ll]og.*
@@ -206,6 +207,8 @@ paket-files
 # Node install directory
 tests/FSharpPlusFable.Tests/node_modules/
 
+# Any node stuff
+node_modules/
 
 # Fable compilation files
 tests/FSharpPlusFable.Tests/FSharpPlusFable
