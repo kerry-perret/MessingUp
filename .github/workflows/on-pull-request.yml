@@ -48,7 +48,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Build the docker-compose stack
-        run: docker-compose -f "./MessingUp.Tests/docker-compose.yml" up
+        run: docker-compose --file "./MessingUp.Tests/docker-compose.yml" up --detached
       - name: Setup .NET Core
         uses: actions/setup-dotnet@v1
         with:
