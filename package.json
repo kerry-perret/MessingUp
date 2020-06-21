@@ -1,0 +1,29 @@
+{
+  "name": "messingup",
+  "version": "1.0.0",
+  "description": "Meh",
+  "dependencies": {
+    "gacp": "^2.9.0"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^9.0.1",
+    "@commitlint/config-conventional": "^9.0.1",
+    "husky": "^4.2.5"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -e .git/COMMIT_EDITMSG"
+    }
+  },
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kerry-perret/MessingUp.git"
+  },
+  "author": "Kerry Perret",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kerry-perret/MessingUp/issues"
+  },
+  "homepage": "https://github.com/kerry-perret/MessingUp#readme"
+}
