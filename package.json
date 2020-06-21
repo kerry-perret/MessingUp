@@ -2,7 +2,9 @@
   "name": "messingup",
   "version": "1.0.0",
   "description": "Meh",
-  "dependencies": {},
+  "dependencies": {
+    "gacp": "^2.9.0"
+  },
   "devDependencies": {
     "@commitlint/cli": "^7.5.2",
     "@commitlint/config-conventional": "^7.5.0",
@@ -13,9 +15,7 @@
       "commit-msg": "commitlint -e .git/COMMIT_EDITMSG"
     }
   },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "scripts": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kerry-perret/MessingUp.git"
