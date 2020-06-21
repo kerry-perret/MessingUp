@@ -26,3 +26,10 @@ services:
       - max_prepared_transactions=100
     ports:
       - 5432:5432
+    # Needed because the postgres container does not provide a health check
+    healthcheck:
+      test: pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+      interval: 1m30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s

@@ -31,7 +31,9 @@ jobs:
       # For some reasons the path is kinda messed up...
       # Doesn't consider the .config folder =|
       - name: Restore tools
-        run: dotnet tool restore
+        run: |
+          export PATH="$PATH:/root/.dotnet/tools"
+          dotnet tool install -g dotnet-fsharplint --version 0.13.3
       - name: Run F# Linter
         run: dotnet fsharplint lint --lint-config fsharplint.json MessingUp.sln
 
@@ -39,7 +41,7 @@ jobs:
     needs: [lint-commit, lint-code]
     strategy:
       matrix:
-        os: [windows-latest, macos-latest, ubuntu-latest]
+        os: [ubuntu-latest]
         dotnet: [3.1.201]
       fail-fast: false
     runs-on: ${{ matrix.os }}
