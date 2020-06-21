@@ -43,10 +43,12 @@ jobs:
       matrix:
         os: [windows-latest, macos-latest, ubuntu-latest]
         dotnet: [3.1.201]
-      fail-fast: true
+      fail-fast: false
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v2
+      - name: Build the docker-compose stack
+        run: docker-compose -f "./MessingUp.Tests/docker-compose.yml" up
       - name: Setup .NET Core
         uses: actions/setup-dotnet@v1
         with:
