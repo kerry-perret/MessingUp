@@ -1,6 +1,6 @@
-name: On Pull Request
+name: On Push
 
-on: [pull_request]
+on: [pull_request, push]
 
 jobs:
 
