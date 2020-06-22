@@ -32,7 +32,13 @@ jobs:
           export PATH="$PATH:/root/.dotnet/tools"
           dotnet tool restore
       - name: Run F# Linter
-        run: ls -al
+        run: |
+          echo "ls -al..."
+          ls -al
+          echo "ls -al /root/.dotnet/tools..."
+          ls -al /root/.dotnet/tools
+
+
         # run: dotnet fsharplint lint --lint-config fsharplint.json MessingUp.sln
 
   run-test:
