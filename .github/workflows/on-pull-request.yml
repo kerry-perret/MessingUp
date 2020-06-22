@@ -27,14 +27,10 @@ jobs:
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: 2.1
+      - name: Restore tools
+        run: dotnet tool install --tool-manifest ./.config/dotnet-tools.json dotnet-fsharplint
       - name: Run F# Linter
-        run: |
-          echo "ls -al..."
-          ls -al
-          echo "ls -al /root/.dotnet/tools..."
-          ls -al /root/.dotnet/tools
-
-
+        run: ls -al
         # run: dotnet fsharplint lint --lint-config fsharplint.json MessingUp.sln
 
   run-test:
