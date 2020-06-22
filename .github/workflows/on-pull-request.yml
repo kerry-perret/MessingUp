@@ -27,10 +27,6 @@ jobs:
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: 2.1
-      - name: Restore tools
-        run: |
-          export PATH="$PATH:/root/.dotnet/tools"
-          dotnet tool restore
       - name: Run F# Linter
         run: |
           echo "ls -al..."
