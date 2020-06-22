@@ -30,7 +30,7 @@ jobs:
       - name: Restore tools
         run: |
           export PATH="$PATH:/root/.dotnet/tools"
-          dotnet tool install -g dotnet-fsharplint --version 0.13.3
+          dotnet tool restore
       - name: Run F# Linter
         run: ls -al
         # run: dotnet fsharplint lint --lint-config fsharplint.json MessingUp.sln
