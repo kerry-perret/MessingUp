@@ -46,7 +46,6 @@ jobs:
         dotnet: [3.1.201]
       fail-fast: false
     runs-on: ${{ matrix.os }}
-    services:
 
     steps:
       - uses: actions/checkout@v2
