@@ -23,15 +23,31 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      - name: Setup .NET Core
+      - name: 🔨 Use .NET Core 2.1 SDK
         uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: [2.1, 3.1.201]
+          dotnet-version: '2.1.x'
+      - name: 🔨 Use .NET Core 3.1 SDK
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '3.1.x'
+      # See https://github.com/actions/setup-dotnet/issues/25#issuecomment-646925506
+      - name: 🪓 **DOTNET HACK** 🪓
+        shell: pwsh
+        run: |
+          $version = Split-Path (Split-Path $ENV:DOTNET_ROOT -Parent) -Leaf;
+          $root = Split-Path (Split-Path $ENV:DOTNET_ROOT -Parent) -Parent;
+          $directories = Get-ChildItem $root | Where-Object { $_.Name -ne $version };
+          foreach ($dir in $directories) {
+            $from = $dir.FullName;
+            $to = "$root/$version";
+            Write-Host Copying from $from to $to;
+            Copy-Item "$from\*" $to -Recurse -Force;
+          }
       - name: Restore tools
         run: dotnet tool install --tool-manifest ./.config/dotnet-tools.json dotnet-fsharplint
       - name: Run F# Linter
-        run: ls -al
-        # run: dotnet fsharplint lint --lint-config fsharplint.json MessingUp.sln
+        run: dotnet fsharplint lint --lint-config fsharplint.json MessingUp.sln
 
   run-test:
     needs: [lint-commit, lint-code]
