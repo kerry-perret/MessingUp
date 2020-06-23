@@ -1,6 +1,6 @@
 name: On Push
 
-on: [pull_request, push]
+on: [push]
 
 jobs:
 
@@ -28,7 +28,7 @@ jobs:
         with:
           dotnet-version: 3.1.201
       - name: Install tools
-        run: dotnet tool install --tool-manifest ./.config/dotnet-tools.json dotnet-fsharplint
+        run: dotnet tool restore --tool-manifest ./.config/dotnet-tools.json
       - name: Restore Projects
         run: dotnet restore
       - name: Run F# Linter
