@@ -16,6 +16,14 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.201
+    - name: print version
+      uses: frabert/replace-string-action@v1.1
+      id: michelite
+      with:
+        pattern: 'refs/tags/v(.*)'
+        string: ${{ github.ref }}
+        replace-with: '$1!'
+    - run: echo ${{ steps.michelite.outputs.result }}
     - name: tag number
       run: echo ${GITHUB_REF##*/}
     - name: Build
