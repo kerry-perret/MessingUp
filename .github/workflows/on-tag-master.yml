@@ -17,7 +17,7 @@ jobs:
       with:
         dotnet-version: 3.1.201
     - name: tag number
-      run: echo ${{ github.event.push.tag_name }}
+      run: echo ${GITHUB_REF##*/}
     - name: Build
       run: echo ${{ github.sha }} > Release.txt
     - name: Test
