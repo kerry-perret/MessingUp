@@ -11,7 +11,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
@@ -26,5 +26,6 @@ jobs:
       uses: rohith/publish-nuget@v2
       with:
         PROJECT_FILE_PATH: MessingUp/MessingUp.fsproj
+        TAG_COMMIT: false
         VERSION_STATIC: ${GITHUB_REF#refs/tags/v}
         NUGET_KEY: ${{secrets.NUGET_KEY}}
