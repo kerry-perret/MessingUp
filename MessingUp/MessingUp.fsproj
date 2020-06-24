@@ -15,15 +15,12 @@
     <PackageId>MessingUp.PackageId</PackageId>
     <PackageTags>F#,Kerry Perret,Farts</PackageTags>
     <RepositoryType>git</RepositoryType>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageLicenseFile>..\LICENSE</PackageLicenseFile>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="..\LICENSE">
-      <Pack>True</Pack>
-      <PackagePath>$(PackageLicenseFile)</PackagePath>
-    </None>
     <Compile Include="Library.fs" />
   </ItemGroup>
 
