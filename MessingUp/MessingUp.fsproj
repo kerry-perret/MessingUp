@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <PackageId>MessingUp.PackageId</PackageId>
+
     <Title>MessingUp.Title</Title>
     <Product>MessingUp.Products</Product>
     <NeutralLanguage>en-US</NeutralLanguage>
@@ -13,7 +13,7 @@
     <PackageProjectUrl>https://github.com/kerry-perret/MessingUp</PackageProjectUrl>
     <PackageDescription>MessingUp.PackageDescription</PackageDescription>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageId>RExtension</PackageId>
+    <PackageId>MessingUp.PackageId</PackageId>
     <PackageTags>F#,Kerry Perret,Farts</PackageTags>
     <RepositoryType>git</RepositoryType>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
