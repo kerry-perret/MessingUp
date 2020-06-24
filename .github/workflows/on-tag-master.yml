@@ -17,10 +17,10 @@ jobs:
       with:
         dotnet-version: 3.1.201
     - name: Branch name
-        id: branch_name
-        run: |
-          echo ::set-output name=source_ver::${GITHUB_REF#refs/tags/v}
-          echo ::set-output name=source_tag::${GITHUB_REF#refs/tags/}
+      id: branch_name
+      run: |
+        echo ::set-output name=source_ver::${GITHUB_REF#refs/tags/v}
+        echo ::set-output name=source_tag::${GITHUB_REF#refs/tags/}
     - run: echo $source_ver
     - run: echo $source_tag
     - name: tag number
