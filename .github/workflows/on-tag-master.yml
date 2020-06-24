@@ -18,7 +18,8 @@ jobs:
       with:
         dotnet-version: 3.1.201
         source-url: https://api.nuget.org/v3/index.json
-      env: ${{ secrets.NUGET_KEY }}
+      env:
+        NUGET_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Get Tag Version
       id: getversion
       run: echo "::set-output name=version::${GITHUB_REF#refs/tags/}"
@@ -32,4 +33,4 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Publish NuGet Package
-      run: dotnet nuget push *.nupkg
+      run: dotnet nuget push *.nupkg --api-key ${{ secrets.NUGET_KEY }}
