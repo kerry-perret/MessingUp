@@ -17,7 +17,7 @@ jobs:
       with:
         dotnet-version: 3.1.201
     - name: Build Binaries
-      run: dotnet build /p:Version=${{ github.event.release.tag_name }}
+      run: dotnet build /p:Version=${{ github.ref }}
     - name: Build
       run: echo ${{ github.sha }} > Release.txt
     - name: Test
