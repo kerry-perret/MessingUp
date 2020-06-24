@@ -12,7 +12,6 @@
 
     <PackageProjectUrl>https://github.com/kerry-perret/MessingUp</PackageProjectUrl>
     <PackageDescription>MessingUp.PackageDescription</PackageDescription>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageId>MessingUp.PackageId</PackageId>
     <PackageTags>F#,Kerry Perret,Farts</PackageTags>
     <RepositoryType>git</RepositoryType>
