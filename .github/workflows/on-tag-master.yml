@@ -21,11 +21,11 @@ jobs:
       if: startsWith(github.ref, 'refs/tags/')
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    - name: publish on version change
+    - name: Publish NuGet Package
       id: publish_nuget
       uses: rohith/publish-nuget@v2
       with:
-        PROJECT_FILE_PATH: MessingUp/MessingUp.fsproj
-        TAG_COMMIT: false
-        VERSION_STATIC: ${GITHUB_REF#refs/tags/v}
-        NUGET_KEY: ${{secrets.NUGET_KEY}}
+          PROJECT_FILE_PATH: MessingUp/MessingUp.fsproj
+          TAG_COMMIT: false
+          VERSION_STATIC: ${{GITHUB_REF#refs/tags/v}}
+          NUGET_KEY: ${{secrets.NUGET_KEY}}
