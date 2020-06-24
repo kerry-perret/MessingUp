@@ -22,7 +22,7 @@ jobs:
         NUGET_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Get Tag Version
       id: getversion
-      run: echo "::set-output name=version::${GITHUB_REF#refs/tags/}"
+      run: echo "::set-output name=version::${GITHUB_REF#refs/tags/v}"
     - name: Build .NET Project
       run: dotnet build --configuration Release -p:Version=${{steps.getversion.outputs.version}} ./MessingUp/MessingUp.fsproj
     - name: Generate NuGet Package from .NET Project
