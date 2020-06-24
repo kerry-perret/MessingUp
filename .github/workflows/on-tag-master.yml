@@ -16,6 +16,8 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.201
+    - name: Build Binaries
+      run: dotnet build /p:Version=${{ github.event.release.tag_name }}
     - name: Build
       run: echo ${{ github.sha }} > Release.txt
     - name: Test
