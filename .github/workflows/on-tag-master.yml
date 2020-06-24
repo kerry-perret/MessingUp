@@ -16,15 +16,10 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.201
-    - name: Branch name
-      id: branch_name
-      run: |
-        echo ::set-output name=source_ver::${GITHUB_REF#refs/tags/v}
-        echo ::set-output name=source_tag::${GITHUB_REF#refs/tags/}
-    - run: echo $source_ver
-    - run: echo $source_tag
-    - name: tag number
-      run: echo ${GITHUB_REF##*/}
+    - name: actual version
+      run: echo ${GITHUB_REF#refs/tags/v}
+    - name: actual tag name
+      run: echo ${GITHUB_REF#refs/tags/}
     - name: Build
       run: echo ${{ github.sha }} > Release.txt
     - name: Test
