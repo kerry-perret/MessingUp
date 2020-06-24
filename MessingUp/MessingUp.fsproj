@@ -23,8 +23,5 @@
   <ItemGroup>
     <None Include="..\LICENSE" Pack="true" PackagePath="$(PackageLicenseFile)"/>
   </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Library.fs"/>
-  </ItemGroup>
 
 </Project>
