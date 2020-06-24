@@ -9,9 +9,11 @@ jobs:
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout Repository
+        uses: actions/checkout@v2
         with:
           fetch-depth: 0
+      - name: Lint Commit Messages
       - uses: wagoid/commitlint-github-action@v1
         with:
           configFile: './.commitlintrc.yml'
@@ -22,14 +24,15 @@ jobs:
     needs: lint-commit
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - name: Setup .NET Core
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+      - name: Setup .NET Environment
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: 3.1.201
-      - name: Install tools
+      - name: Restore .NET Tools
         run: dotnet tool restore --tool-manifest ./.config/dotnet-tools.json
-      - name: Restore Projects
+      - name: Restore .NET Projects
         run: dotnet restore
       - name: Run F# Linter
         run: dotnet fsharplint lint --lint-config fsharplint.json MessingUp.sln
@@ -38,12 +41,13 @@ jobs:
     needs: [lint-commit, lint-code]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Build the docker-compose stack
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+      - name: Start docker-compose
         run: docker-compose --file "./MessingUp.Tests/docker-compose.yml" up --detach
-      - name: Setup .NET Core
+      - name: Setup .NET Environment
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: 3.1.201
-      - name: Run Tests
+      - name: Run .NET Tests
         run: dotnet test

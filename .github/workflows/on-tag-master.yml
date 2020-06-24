@@ -11,23 +11,24 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Setup .NET Core
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+    - name: Setup .NET Environment
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.201
-    - name: Get Version
+        source-url: https://api.nuget.org/v3/index.json
+    - name: Get Tag Version
       id: getversion
       run: echo "::set-output name=version::${GITHUB_REF#refs/tags/}"
+    - name: Build .NET Project
+      run: dotnet build --configuration Release -p:Version=${{steps.getversion.outputs.version}} ./MessingUp/MessingUp.fsproj
+    - name: Generate NuGet Package from .NET Project
+      run: dotnet pack --configuration Release --no-build -p:PackageVersion=${{steps.getversion.outputs.version}} ./MessingUp/MessingUp.fsproj --output .
     - name: Create Release
       uses: softprops/action-gh-release@v1
       if: startsWith(github.ref, 'refs/tags/')
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Publish NuGet Package
-      uses: rohith/publish-nuget@v2
-      with:
-        PROJECT_FILE_PATH: MessingUp/MessingUp.fsproj
-        TAG_COMMIT: false
-        VERSION_STATIC: ${{steps.getversion.outputs.version}}
-        NUGET_KEY: ${{secrets.NUGET_KEY}}
+      run: dotnet nuget push *.nupkg --api-key ${{secrets.NUGET_KEY}}
