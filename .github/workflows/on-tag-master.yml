@@ -18,7 +18,7 @@ jobs:
         dotnet-version: 3.1.201
     - name: Get Version
       id: getversion
-      run: echo "::set-output name=version::${GITHUB_REF#refs/tags/v}"
+      run: echo "::set-output name=version::${GITHUB_REF#refs/tags/}"
     - name: Create Release
       uses: softprops/action-gh-release@v1
       if: startsWith(github.ref, 'refs/tags/')
@@ -27,7 +27,7 @@ jobs:
     - name: Publish NuGet Package
       uses: rohith/publish-nuget@v2
       with:
-          PROJECT_FILE_PATH: MessingUp/MessingUp.fsproj
-          TAG_COMMIT: false
-          VERSION_STATIC: ${{ steps.getversion.outputs.version }}
-          NUGET_KEY: ${{secrets.NUGET_KEY}}
+        PROJECT_FILE_PATH: MessingUp/MessingUp.fsproj
+        TAG_COMMIT: false
+        VERSION_STATIC: ${{steps.getversion.outputs.version}}
+        NUGET_KEY: ${{secrets.NUGET_KEY}}
