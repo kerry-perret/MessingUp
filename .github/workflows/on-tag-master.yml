@@ -28,7 +28,7 @@ jobs:
     - name: Generate NuGet Package from .NET Project
       run: dotnet pack --configuration Release --no-build -p:PackageVersion=${{env.version}} ./MessingUp/MessingUp.fsproj --output ./nuget
     - name: Get NuGet Package Path
-      run: echo "::set-env name=path::./nuget/${ls ./nuget/ | head -n 1}"
+      run: echo "##[set-env name=path;]$(ls ./nuget/ | head -n 1)"
     - name: Update NuGet Package to Release
       uses: softprops/action-gh-release@v1
       if: startsWith(github.ref, 'refs/tags/')
