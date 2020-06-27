@@ -22,19 +22,23 @@ jobs:
         NUGET_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Get Tag Version
       id: getversion
-      run: echo "::set-env name=version::${GITHUB_REF#refs/tags/v}"
+      run: echo "::set-env name=tag_version::${GITHUB_REF#refs/tags/v}"
     - name: Build .NET Project
-      run: dotnet build --configuration Release -p:Version=${{env.version}} ./MessingUp/MessingUp.fsproj
+      run: dotnet build --configuration Release -p:Version=${{env.tag_version}} ./MessingUp/MessingUp.fsproj
     - name: Generate NuGet Package from .NET Project
-      run: dotnet pack --configuration Release --no-build -p:PackageVersion=${{env.version}} ./MessingUp/MessingUp.fsproj --output ./nuget
+      run: dotnet pack --configuration Release --no-build -p:PackageVersion=${{env.tag_version}} ./MessingUp/MessingUp.fsproj --output ./nuget
     - name: Get NuGet Package Path
-      run: echo "##[set-env name=path;]$(ls ./nuget/ | head -n 1)"
+      run: |
+        basePath=./nuget
+        fileName=$(ls ./nuget/ | head -n 1)
+        filePath=$basePath/$fileName
+        echo "::set-env name=nuget_package_path::${filePath}"
     - name: Update NuGet Package to Release
       uses: softprops/action-gh-release@v1
       if: startsWith(github.ref, 'refs/tags/')
       with:
-        file: ${{env.path}}rppot
+        file: ${{env.nuget_package_path}}
       env:
         GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
     - name: Publish NuGet Package
-      run: dotnet nuget push ${{env.path}} --api-key ${{secrets.NUGET_KEY}} --force-english-output
+      run: dotnet nuget push ${{env.nuget_package_path}} --api-key ${{secrets.NUGET_KEY}} --force-english-output
