@@ -1,0 +1,35 @@
+﻿version: "3.7"
+
+services:
+
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2019-CU3-ubuntu-18.04
+    restart: unless-stopped
+    environment:
+      - MSSQL_PID=Express
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=MyPassword!
+    ports:
+      - 1433:1433
+
+  postgres:
+    image: postgres:12.3-alpine
+    restart: unless-stopped
+    environment:
+      - POSTGRES_HOST_AUTH_METHOD=trust
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
+    command:
+      - postgres
+      - -c
+      - max_prepared_transactions=100
+    ports:
+      - 5432:5432
+    # Needed because the postgres container does not provide a health check
+    healthcheck:
+      test: pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+      interval: 1m30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s

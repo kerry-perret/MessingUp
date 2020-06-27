@@ -2,10 +2,25 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+
+    <Title>MessingUp.Title</Title>
+    <Product>MessingUp.Products</Product>
+    <NeutralLanguage>en-US</NeutralLanguage>
+    <Authors>MessingUp.Authors</Authors>
+    <Company>MessingUp.Company</Company>
+    <RepositoryUrl>https://github.com/kerry-perret/MessingUp</RepositoryUrl>
+
+    <PackageProjectUrl>https://github.com/kerry-perret/MessingUp</PackageProjectUrl>
+    <PackageDescription>MessingUp.PackageDescription</PackageDescription>
+    <PackageId>MessingUp.PackageId</PackageId>
+    <PackageTags>F#,Kerry Perret,Farts</PackageTags>
+    <RepositoryType>git</RepositoryType>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="Library.fs"/>
+    <Compile Include="Library.fs" />
   </ItemGroup>
 
 </Project>
